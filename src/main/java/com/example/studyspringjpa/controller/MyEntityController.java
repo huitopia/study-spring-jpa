@@ -17,6 +17,7 @@ public class MyEntityController {
     public List<MyEntity> getAll() {
         return myEntityService.findAll();
     }
+
     @PostMapping
     public MyEntity create(@RequestBody MyEntity myEntity) {
         System.out.println("myEntity.toString() = " + myEntity.toString());
