@@ -1,22 +1,36 @@
 package com.example.studyspringjpa.response;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import org.springframework.http.HttpStatus;
+/* JsonInclude : null 값일 대 필드를 JSON 응답에서 제외 */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class SuccessResult<T> {
     private String message;
-    private String status;
+    private HttpStatus httpStatus;  // HTTP 상태 코드 필드 이름을 httpStatus로 변경
     private T data;
 
     public SuccessResult(SuccessType successType) {
         this.message = successType.getMessage();
-        this.status = "OK";
+        this.httpStatus = successType.getHttpStatus();  // SuccessType에 따라 HTTP 상태 코드 설정
         this.data = null;
     }
-
-    public SuccessResult(SuccessType successType, String customMessage, T data) {
-        this.message = customMessage != null ? customMessage : successType.getMessage();
-        this.status = "OK";
+    public SuccessResult(SuccessType successType,T data) {
+        this.message = successType.getMessage();
+        this.httpStatus = successType.getHttpStatus();
         this.data = data;
     }
+    public SuccessResult(SuccessType successType, String customMessage) {
+        this.message = customMessage;
+        this.httpStatus = successType.getHttpStatus();
+        this.data = null;
+    }
+    public SuccessResult(SuccessType successType, String customMessage, T data) {
+        this.message = customMessage != null ? customMessage : successType.getMessage();
+        this.data = data;
+        this.httpStatus = successType.getHttpStatus();
+    }
 
+    // getter 및 setter
     public String getMessage() {
         return message;
     }
@@ -25,12 +39,12 @@ public class SuccessResult<T> {
         this.message = message;
     }
 
-    public String getStatus() {
-        return status;
+    public HttpStatus getHttpStatus() {
+        return httpStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setHttpStatus(HttpStatus httpStatus) {
+        this.httpStatus = httpStatus;
     }
 
     public T getData() {
