@@ -2,20 +2,19 @@ package com.example.studyspringjpa.exception.common;
 
 public class CustomException extends RuntimeException {
     private final ErrorType errorType;  // ErrorType을 필드로 추가
-    private final String message;
+    // 기본 메시지 사용
+    public CustomException(ErrorType errorType) {
+        super(errorType.getMessage());
+        this.errorType = errorType;
+    }
 
-    public CustomException(ErrorType errorType, String message) {
-        super(message);  // 메시지는 부모 클래스 RuntimeException에 전달
-        this.errorType = errorType;  // ErrorType은 CustomException 클래스에서 처리
-        this.message = message;
+    // 추가 메시지를 덧붙일 수 있도록 수정
+    public CustomException(ErrorType errorType, String additionalMessage) {
+        super(errorType.getMessage() + ": " + additionalMessage);
+        this.errorType = errorType;
     }
 
     public ErrorType getErrorType() {
         return errorType;
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
     }
 }

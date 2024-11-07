@@ -3,8 +3,8 @@ package com.example.studyspringjpa.exception.specific;
 import com.example.studyspringjpa.exception.common.CustomException;
 import com.example.studyspringjpa.exception.common.ErrorType;
 
-public class DuplicateIdException extends CustomException {
-    public DuplicateIdException(String message) {
-        super(ErrorType.DUPLICATE_ID,message);
+public class DuplicateResourceException extends CustomException {
+    public DuplicateResourceException(String message) {
+        super(ErrorType.DUPLICATE_RESOURCE,message);
     }
 }

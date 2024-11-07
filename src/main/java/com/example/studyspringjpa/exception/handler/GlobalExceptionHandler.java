@@ -67,7 +67,7 @@ public class GlobalExceptionHandler {
             case UNAUTHORIZED: return HttpStatus.UNAUTHORIZED;
             case FORBIDDEN: return HttpStatus.FORBIDDEN;
             case RESOURCE_NOT_FOUND: return HttpStatus.NOT_FOUND;
-            case DUPLICATE_ID: return HttpStatus.CONFLICT;
+            case DUPLICATE_RESOURCE: return HttpStatus.CONFLICT;
             case VALIDATION_ERROR: return HttpStatus.BAD_REQUEST;
             default: return HttpStatus.INTERNAL_SERVER_ERROR;
         }
