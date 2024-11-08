@@ -1,8 +1,8 @@
-package com.example.studyspringjpa.exception.handler;
+package com.example.studyspringjpa.common.exception.handler;
 
-import com.example.studyspringjpa.exception.common.CustomException;
-import com.example.studyspringjpa.exception.common.ErrorResponse;
-import com.example.studyspringjpa.exception.common.ErrorType;
+import com.example.studyspringjpa.common.exception.specific.CustomException;
+import com.example.studyspringjpa.common.ErrorResponse;
+import com.example.studyspringjpa.common.ErrorType;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

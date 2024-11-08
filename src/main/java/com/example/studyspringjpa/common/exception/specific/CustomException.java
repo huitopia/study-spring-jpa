@@ -1,4 +1,6 @@
-package com.example.studyspringjpa.exception.common;
+package com.example.studyspringjpa.common.exception.specific;
+
+import com.example.studyspringjpa.common.ErrorType;
 
 public class CustomException extends RuntimeException {
     private final ErrorType errorType;  // ErrorType을 필드로 추가

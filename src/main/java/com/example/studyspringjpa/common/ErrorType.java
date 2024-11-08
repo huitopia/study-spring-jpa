@@ -1,4 +1,4 @@
-package com.example.studyspringjpa.exception.common;
+package com.example.studyspringjpa.common;
 
 public enum ErrorType {
     /* 400 : 실패 */

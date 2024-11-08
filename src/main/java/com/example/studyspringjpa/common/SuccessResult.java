@@ -1,4 +1,4 @@
-package com.example.studyspringjpa.response;
+package com.example.studyspringjpa.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.http.HttpStatus;

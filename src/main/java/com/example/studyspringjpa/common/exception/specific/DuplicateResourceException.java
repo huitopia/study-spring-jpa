@@ -1,7 +1,6 @@
-package com.example.studyspringjpa.exception.specific;
+package com.example.studyspringjpa.common.exception.specific;
 
-import com.example.studyspringjpa.exception.common.CustomException;
-import com.example.studyspringjpa.exception.common.ErrorType;
+import com.example.studyspringjpa.common.ErrorType;
 
 public class DuplicateResourceException extends CustomException {
     public DuplicateResourceException(String message) {
