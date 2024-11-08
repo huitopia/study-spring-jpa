@@ -1,7 +1,7 @@
-package com.example.studyspringjpa.utils;
+package com.example.studyspringjpa.common.utils;
 
-import com.example.studyspringjpa.response.SuccessResult;
-import com.example.studyspringjpa.response.SuccessType;
+import com.example.studyspringjpa.common.SuccessResult;
+import com.example.studyspringjpa.common.SuccessType;
 import org.springframework.http.ResponseEntity;
 
 public class SuccessResultUtil {
