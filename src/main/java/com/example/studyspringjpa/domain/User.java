@@ -1,5 +1,6 @@
 package com.example.studyspringjpa.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -27,9 +28,11 @@ public class User {
     @NotNull(message = "이름은 필수입니다.")
     private String name;
 
+    @JsonIgnoreProperties("user") // Board 엔티티에서 user 필드를 무시하여 순환 참조 방지
     @OneToMany(mappedBy = "user")
     private List<Board> boards;
 
+    @JsonIgnoreProperties("user")
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
 }
