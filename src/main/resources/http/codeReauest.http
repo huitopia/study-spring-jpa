@@ -1,0 +1,29 @@
+### User SELECT - 유저 리스트 조회
+GET {{root-path}}/api/user
+Content-Type: application/json
+
+### User INSERT - 유저 생성
+POST {{root-path}}/api/user
+Content-Type: application/json
+
+{
+  "id": "test8",
+  "name": "cococo"
+}
+
+### User SELECT - 유저 고유번호로 조회
+GET {{root-path}}/api/user/{{seqNo}}
+Content-Type: application/json
+
+### User UPDATE - 유저 정보 수정
+PUT {{root-path}}/api/user/{{seqNo}}
+Content-Type: application/json
+
+{
+  "id": "test8",
+  "name": "coco"
+}
+
+### User DELETE - 유저 삭제
+DELETE {{root-path}}/api/user/{{seqNo}}
+Content-Type: application/json
