@@ -1,6 +1,6 @@
 package com.example.studyspringjpa.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -14,18 +14,18 @@ import lombok.Setter;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer seqNo;
+    private Integer commentSeqNo;
 
     @NotNull(message = "내용은 필수입니다.")
     private String content;
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "userSeqNo")
+    @JsonProperty("userSeqNo")
     private User user;
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "BoardSeqNo")
+    @JsonProperty("BoardSeqNo")
     private Board board;
 }

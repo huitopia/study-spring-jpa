@@ -9,9 +9,9 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
     /* Optional : NullPointerException 방지 */
-    Optional<User> findBySeqNo(Integer seqNo);
+    Optional<User> findByUserSeqNo(Integer userSeqNo);
 
     boolean existsById(String id);
 
-    void deleteBySeqNo(Integer seqNo);
+    void deleteByUserSeqNo(Integer userSeqNo);
 }

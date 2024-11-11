@@ -1,7 +1,7 @@
 package com.example.studyspringjpa.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -20,7 +20,7 @@ import java.util.List;
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer seqNo;
+    private Integer boardSeqNo;
 
     @NotNull(message = "제목은 필수입니다.")
     @Size(min = 2, max = 20, message = "제목은 2자 이상 20자 이하이어야 합니다.")
@@ -32,10 +32,14 @@ public class Board {
     @CreationTimestamp
     private LocalDateTime createDate;
 
-    @JsonBackReference  // 순환 참조 방지
-    @ManyToOne
-    @JoinColumn(name = "userSeqNo")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userSeqNo", nullable = false)
     private User user;
+
+    @JsonProperty("userSeqNo")
+    public Integer getUserSeqNo(User user) {
+        return user != null ? user.getUserSeqNo() : null;
+    }
 
     /*
      * 영속성 전이(Cascade)
@@ -49,7 +53,8 @@ public class Board {
      *   연관된 엔티티를 어떻게 처리할지에 대한 규칙 정의하는 것으로 선택적 옵션임
      *   상위와 하위의 생명주기가 완전히 함께하는 경우 유용
      */
-    @JsonIgnoreProperties("board")
+
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true) // Board 삭제 시 Comment 함께 삭제됨
+    @JsonIgnore
     private List<Comment> comments;
 }

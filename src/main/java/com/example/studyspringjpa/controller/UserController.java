@@ -5,8 +5,6 @@ import com.example.studyspringjpa.common.SuccessType;
 import com.example.studyspringjpa.common.utils.SuccessResultUtil;
 import com.example.studyspringjpa.domain.User;
 import com.example.studyspringjpa.service.UserService;
-import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,8 +13,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public ResponseEntity<SuccessResult<List<User>>> findAllUsers() {
@@ -25,28 +26,28 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<SuccessResult<Void>> createUser(@Valid @RequestBody User user) {
+    public ResponseEntity<SuccessResult<Void>> createUser(@RequestBody User user) {
         userService.createUser(user);
         return SuccessResultUtil.success(SuccessType.DATA_SAVED);
     }
 
-    @GetMapping("/{seqNo}")
-    public ResponseEntity<SuccessResult<User>> findUserBySeqNo(@PathVariable Integer seqNo) {
-        User user = userService.findUserBySeqNo(seqNo);
+    @GetMapping("/{userSeqNo}")
+    public ResponseEntity<SuccessResult<User>> findUserBySeqNo(@PathVariable Integer userSeqNo) {
+        User user = userService.findUserByUserSeqNo(userSeqNo);
         return SuccessResultUtil.success(SuccessType.DATA_RETRIEVED, user);
     }
 
-    @PutMapping("/{seqNo}")
-    public ResponseEntity<SuccessResult<Void>> updateUserBySeqNo(@Valid @RequestBody User user
-            , @PathVariable Integer seqNo) {
-        user.setSeqNo(seqNo);
-        userService.updateUserBySeqNo(user);
+    @PutMapping("/{userSeqNo}")
+    public ResponseEntity<SuccessResult<Void>> updateUserBySeqNo(@RequestBody User user
+            , @PathVariable Integer userSeqNo) {
+        user.setUserSeqNo(userSeqNo);
+        userService.updateUserByUserSeqNo(user);
         return SuccessResultUtil.success(SuccessType.DATA_UPDATED);
     }
 
-    @DeleteMapping("/{seqNo}")
-    public ResponseEntity<SuccessResult<Void>> deleteUserBySeqNo(@PathVariable Integer seqNo) {
-        userService.deleteUserBySeqNo(seqNo);
+    @DeleteMapping("/{userSeqNo}")
+    public ResponseEntity<SuccessResult<Void>> deleteUserBySeqNo(@PathVariable Integer userSeqNo) {
+        userService.deleteUserByUserSeqNo(userSeqNo);
         return SuccessResultUtil.success(SuccessType.DATA_DELETED);
     }
 }

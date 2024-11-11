@@ -26,6 +26,7 @@ public class UserService {
     private UserRepository userRepository;
 
     public void createUser(User user) {
+        System.out.println("user.getId() = " + user.getId());
         if(checkDuplicateUserId(user.getId())) {
             throw new CustomException(ErrorType.DUPLICATE_RESOURCE, "중복된 아이디가 존재합니다.");
         }
@@ -43,9 +44,9 @@ public class UserService {
         return userList;
     }
 
-    public User findUserBySeqNo(Integer seqNo) {
-        return userRepository.findBySeqNo(seqNo)
-                .orElseThrow(()->new CustomException(ErrorType.RESOURCE_NOT_FOUND, seqNo + "번 사용자를 찾을 수 없습니다."));
+    public User findUserByUserSeqNo(Integer userSeqNo) {
+        return userRepository.findByUserSeqNo(userSeqNo)
+                .orElseThrow(()->new CustomException(ErrorType.RESOURCE_NOT_FOUND, userSeqNo + "번 사용자를 찾을 수 없습니다."));
         /*
         * orElseThrow()
         *   Optional 사용 시 사용되는 메서드
@@ -57,9 +58,9 @@ public class UserService {
         return userRepository.existsById(id);
     }
 
-    public void updateUserBySeqNo(User user) {
+    public void updateUserByUserSeqNo(User user) {
         // 사용자 조회
-        User updateUser = findUserBySeqNo(user.getSeqNo());
+        User updateUser = findUserByUserSeqNo(user.getUserSeqNo());
         // 예외 발생하면 실행되지 않을 코드
         updateUser.setId(user.getId());
         updateUser.setName(user.getName());
@@ -70,8 +71,8 @@ public class UserService {
         userRepository.save(updateUser);
     }
 
-    public void deleteUserBySeqNo(Integer seqNo) {
-        User deleteUser = findUserBySeqNo(seqNo);
-        userRepository.deleteBySeqNo(deleteUser.getSeqNo());
+    public void deleteUserByUserSeqNo(Integer userSeqNo) {
+        User deleteUser = findUserByUserSeqNo(userSeqNo);
+        userRepository.deleteByUserSeqNo(deleteUser.getUserSeqNo());
     }
 }

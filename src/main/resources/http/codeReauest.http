@@ -7,23 +7,40 @@ POST {{root-path}}/api/user
 Content-Type: application/json
 
 {
-  "id": "test8",
-  "name": "cococo"
+  "id": "test3",
+  "name": "cece"
 }
 
 ### User SELECT - 유저 고유번호로 조회
-GET {{root-path}}/api/user/{{seqNo}}
+GET {{root-path}}/api/user/{{userSeqNo}}
 Content-Type: application/json
 
 ### User UPDATE - 유저 정보 수정
-PUT {{root-path}}/api/user/{{seqNo}}
+PUT {{root-path}}/api/user/{{userSeqNo}}
 Content-Type: application/json
 
 {
-  "id": "test8",
+  "id": "test1",
   "name": "coco"
 }
 
 ### User DELETE - 유저 삭제
-DELETE {{root-path}}/api/user/{{seqNo}}
+DELETE {{root-path}}/api/user/{{userSeqNo}}
 Content-Type: application/json
+
+
+### Board SELECT - 게시물 리스트 조회
+GET {{root-path}}/api/board
+Content-Type: application/json
+
+### Board INSERT - 게시물 생성
+POST {{root-path}}/api/board
+Content-Type: application/json
+
+{
+  "title": "title1",
+  "content": "content1",
+  "user": {
+    "userSeqNo": 1
+  }
+}
