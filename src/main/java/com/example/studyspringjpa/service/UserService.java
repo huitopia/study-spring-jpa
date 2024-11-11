@@ -1,12 +1,12 @@
 package com.example.studyspringjpa.service;
 
-import com.example.studyspringjpa.domain.User;
-import com.example.studyspringjpa.common.exception.specific.CustomException;
 import com.example.studyspringjpa.common.ErrorType;
+import com.example.studyspringjpa.common.exception.specific.CustomException;
+import com.example.studyspringjpa.domain.User;
 import com.example.studyspringjpa.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
@@ -14,6 +14,14 @@ import java.util.List;
 @Service
 @Transactional
 public class UserService {
+    /*
+     * 필드 주입 방식
+     *   인스턴스를 자동으로 주입
+     *   생성자가 없고 필드에서 바로 의존성을 주입받기 때문에(런타임 시점) 테스트가 어려워짐
+     *   required-false 로 설정되지 않으면 NullPointException 발생 가능성 있음
+     *   클래스의 불변성 보장 못함
+     *   의존성이 많아지면 관리가 어려워짐
+     */
     @Autowired
     private UserRepository userRepository;
 
